@@ -12,7 +12,7 @@ struct Contact {
     let phone: String
     let email: String
     
-    static let allContacts: [Contact] = [
+    static var allContacts: [Contact] = [
         Contact(name: "Rezaul Islam", phone: "01711111111", email: "rezaul@gmail.com"),
         Contact(name: "Tarek Hossain", phone: "01711111112", email: "tarek@gmail.com"),
         Contact(name: "Nusrat Jahan", phone: "01711111113", email: "nusrat@gmail.com"),
