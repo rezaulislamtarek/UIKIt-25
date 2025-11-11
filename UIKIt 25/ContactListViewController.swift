@@ -17,6 +17,7 @@ class ContactListViewController: UIViewController {
         title = "Contacts"
         navigationController?.navigationBar.prefersLargeTitles = true
         setupUI()
+        setupNavigationBar()
         setupConstraint()
  
     }
@@ -47,6 +48,42 @@ class ContactListViewController: UIViewController {
                 contactTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
                 contactTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
             ])
+    }
+    
+    
+    func setupNavigationBar(){
+        let addButton = UIBarButtonItem(
+            barButtonSystemItem: .add, target: self, action: #selector(addNewContact)
+        )
+        navigationItem.rightBarButtonItems = [addButton]
+    }
+    
+    @objc func addNewContact(){
+        let alert = UIAlertController(title: "Add Contact", message: "Enter contact details", preferredStyle: .alert)
+        
+        alert.addTextField{ tf in
+            tf.placeholder = "Name"
+        }
+        alert.addTextField{ tf in
+            tf.placeholder = "Phone"
+            tf.keyboardType = .phonePad
+        }
+        alert.addTextField{ tf in
+            tf.placeholder = "Email"
+            tf.keyboardType = .emailAddress
+        }
+        
+        let saveButton = UIAlertAction(title: "Save", style: .default) { [weak self] _ in
+            guard let name = alert.textFields?[0].text, let phone = alert.textFields?[1].text, let email = alert.textFields?[2].text else { return }
+            let newContact = Contact(name: name, phone: phone, email: email)
+            Contact.allContacts.append(newContact)
+            self?.contactTableView.reloadData()
+        }
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
+        alert.addAction(saveButton)
+        alert.addAction(cancelAction)
+        present(alert, animated: true)
     }
 
 }
