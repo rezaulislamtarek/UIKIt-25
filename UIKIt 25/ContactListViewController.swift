@@ -101,6 +101,7 @@ extension ContactListViewController: UITableViewDataSource {
         content.secondaryText = contact.phone
         content.image = UIImage(systemName: "person.circle")
         cell.contentConfiguration = content
+        cell.accessoryType = .disclosureIndicator
         return cell
     }
 }
