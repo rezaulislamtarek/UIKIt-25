@@ -113,6 +113,14 @@ extension ContactListViewController: UITableViewDelegate {
         navigateToContactLIstDetailsViewController(for: selectedContact )
     }
     
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            let contactToDelete = Contact.allContacts[indexPath.row]
+            Contact.allContacts.remove(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: .fade)
+        }
+    }
+    
     func navigateToContactLIstDetailsViewController(for contact: Contact) {
         let contactDetailsViewController = ContactDetailsViewController(contact: contact)
         navigationController?.pushViewController(contactDetailsViewController, animated: true)
