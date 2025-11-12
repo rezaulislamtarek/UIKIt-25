@@ -48,6 +48,9 @@ class LoginViewController: UIViewController {
         uiLabel.lineBreakMode = .byWordWrapping
         view.addSubview(uiLabel)
         
+        emailTextField.text = "reza@test.com"
+        passwordTextField.text = "secret"
+        
         // 🔵 Circular progress indicator
         activityIndicator.hidesWhenStopped = true
         activityIndicator.color = .systemBlue
