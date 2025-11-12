@@ -17,6 +17,7 @@ class ContactListViewController: UIViewController {
         title = "Contacts"
         navigationController?.navigationBar.prefersLargeTitles = true
         setupUI()
+        setupNavigationBar()
         setupConstraint()
  
     }
@@ -48,6 +49,42 @@ class ContactListViewController: UIViewController {
                 contactTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
             ])
     }
+    
+    
+    func setupNavigationBar(){
+        let addButton = UIBarButtonItem(
+            barButtonSystemItem: .add, target: self, action: #selector(addNewContact)
+        )
+        navigationItem.rightBarButtonItems = [addButton]
+    }
+    
+    @objc func addNewContact(){
+        let alert = UIAlertController(title: "Add Contact", message: "Enter contact details", preferredStyle: .alert)
+        
+        alert.addTextField{ tf in
+            tf.placeholder = "Name"
+        }
+        alert.addTextField{ tf in
+            tf.placeholder = "Phone"
+            tf.keyboardType = .phonePad
+        }
+        alert.addTextField{ tf in
+            tf.placeholder = "Email"
+            tf.keyboardType = .emailAddress
+        }
+        
+        let saveButton = UIAlertAction(title: "Save", style: .default) { [weak self] _ in
+            guard let name = alert.textFields?[0].text, let phone = alert.textFields?[1].text, let email = alert.textFields?[2].text else { return }
+            let newContact = Contact(name: name, phone: phone, email: email)
+            Contact.allContacts.append(newContact)
+            self?.contactTableView.reloadData()
+        }
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
+        alert.addAction(saveButton)
+        alert.addAction(cancelAction)
+        present(alert, animated: true)
+    }
 
 }
 
@@ -64,6 +101,7 @@ extension ContactListViewController: UITableViewDataSource {
         content.secondaryText = contact.phone
         content.image = UIImage(systemName: "person.circle")
         cell.contentConfiguration = content
+        cell.accessoryType = .disclosureIndicator
         return cell
     }
 }
@@ -73,6 +111,14 @@ extension ContactListViewController: UITableViewDelegate {
         tableView.deselectRow(at: indexPath, animated: true)
         let selectedContact = Contact.allContacts[indexPath.row]
         navigateToContactLIstDetailsViewController(for: selectedContact )
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            let contactToDelete = Contact.allContacts[indexPath.row]
+            Contact.allContacts.remove(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: .fade)
+        }
     }
     
     func navigateToContactLIstDetailsViewController(for contact: Contact) {
