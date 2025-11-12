@@ -12,6 +12,7 @@ struct Article {
     let date: String
     let summary: String
     let imageUrl: String?
+    var isFavourite: Bool = false
     
     static var articles: [Article] = [
         Article(

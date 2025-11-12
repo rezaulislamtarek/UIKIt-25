@@ -23,8 +23,8 @@ class NewsFeedViewController: UIViewController {
     func setupUI(){
         tableView.register(ArticleCellTableViewCell.self, forCellReuseIdentifier: ArticleCellTableViewCell.reuseIdentifier )
         tableView.dataSource = self
-        tableView.rowHeight = 100
         tableView.rowHeight = UITableView.automaticDimension
+        tableView.estimatedRowHeight = 140
         
         tableView.separatorStyle = .singleLine
         tableView.separatorInset = UIEdgeInsets(top: 2, left: 2, bottom: 2, right: 2)
@@ -40,6 +40,13 @@ class NewsFeedViewController: UIViewController {
             tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
     }
+    
+    private func toggleFavourite(for indexPath: IndexPath, cell: ArticleCellTableViewCell) {
+        guard Article.articles.indices.contains(indexPath.row) else { return }
+        Article.articles[indexPath.row].isFavourite.toggle()
+        let isFavourite = Article.articles[indexPath.row].isFavourite
+        cell.setFavourite(isFavourite)
+    }
 }
 
 extension NewsFeedViewController : UITableViewDataSource{
@@ -50,8 +57,15 @@ extension NewsFeedViewController : UITableViewDataSource{
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: ArticleCellTableViewCell.reuseIdentifier, for: indexPath) as? ArticleCellTableViewCell else { return UITableViewCell()
         }
-        let artile = Article.articles[indexPath.row]
-        cell.config(with: artile)
+        let article = Article.articles[indexPath.row]
+        cell.config(with: article) { [weak self, weak tableView] tappedCell in
+            guard
+                let self,
+                let tableView,
+                let tappedIndexPath = tableView.indexPath(for: tappedCell)
+            else { return }
+            self.toggleFavourite(for: tappedIndexPath, cell: tappedCell)
+        }
         cell.selectionStyle = .none
         
         return cell
