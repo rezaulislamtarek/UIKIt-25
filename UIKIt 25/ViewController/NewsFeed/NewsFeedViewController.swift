@@ -27,6 +27,7 @@ class NewsFeedViewController: UIViewController {
         tableView.rowHeight = UITableView.automaticDimension
         
         tableView.separatorStyle = .singleLine
+        tableView.separatorInset = UIEdgeInsets(top: 2, left: 2, bottom: 2, right: 2)
         
         view.addSubviews(tableView)
     }
@@ -51,6 +52,7 @@ extension NewsFeedViewController : UITableViewDataSource{
         }
         let artile = Article.articles[indexPath.row]
         cell.config(with: artile)
+        cell.selectionStyle = .none
         
         return cell
     }
