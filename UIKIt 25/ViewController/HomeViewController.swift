@@ -12,6 +12,7 @@ class HomeViewController: UIViewController {
 
    
     let contactAppButton = UIButton()
+    let articleAppButton = UIButton()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,7 +26,8 @@ class HomeViewController: UIViewController {
     }
 
     func setupAction(){
-        contactAppButton.addTarget(self, action: #selector(navigateToDetails), for: .touchUpInside)
+        contactAppButton.addTarget(self, action: #selector(navigateToContactList), for: .touchUpInside)
+        articleAppButton.addTarget(self, action: #selector(navigateToArticle), for: .touchUpInside)
     }
 
     func setupUI(){
@@ -34,17 +36,30 @@ class HomeViewController: UIViewController {
         contactAppButton.backgroundColor = .systemBlue
         contactAppButton.layer.cornerRadius = 8
         view.addSubview(contactAppButton)
+        
+        articleAppButton.setTitle("Article App ", for: .normal)
+        articleAppButton.backgroundColor = .systemBlue
+        articleAppButton.layer.cornerRadius = 8
+        view.addSubview(articleAppButton)
     }
 
     func setupConsraints(){
         
         contactAppButton.setDefultConstraints(view: view, height: 50)
         contactAppButton.topToSafeArea(of: view, 40)
+        
+        articleAppButton.setDefultConstraints(view: view, height: 50)
+        articleAppButton.topToBottomOf(contactAppButton, 16)
     }
 
-    @objc func navigateToDetails() {
-        let detailsVC = ContactListViewController()
-        navigationController?.pushViewController(detailsVC, animated: true)
+    @objc func navigateToContactList() {
+        let vc = ContactListViewController()
+        navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    @objc func navigateToArticle() {
+        let vc = NewsFeedViewController()
+        navigationController?.pushViewController(vc, animated: true)
     }
 }
 
