@@ -7,7 +7,11 @@
 
 import UIKit
 
-class ArticleCellTableViewCell: UITableViewCell {
+protocol ArticleCellDelegate: AnyObject {
+    func didTapOnFavouriteButton(cell: ArticleCell)
+}
+
+class ArticleCell: UITableViewCell {
     
     static let reuseIdentifier = "ArticleCell"
     let titleLabel: UILabel = {
@@ -62,12 +66,13 @@ class ArticleCellTableViewCell: UITableViewCell {
         return button
     }()
     
-    private var favouriteButtonAction: ((ArticleCellTableViewCell) -> Void)?
+    weak var delegate: ArticleCellDelegate?
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupUI()
         setupConstraints()
+        
     }
     
     required init?(coder: NSCoder) {
@@ -109,15 +114,14 @@ class ArticleCellTableViewCell: UITableViewCell {
     
     override func prepareForReuse() {
         super.prepareForReuse()
-        favouriteButtonAction = nil
+         
     }
     
-    func config(with article : Article, favouriteAction: ((ArticleCellTableViewCell) -> Void)? = nil){
+    func config(with article : Article){
         titleLabel.text = article.title
         authorLabel.text = article.author
         dateLabel.text = article.date
         summaryLabel.text = article.summary
-        favouriteButtonAction = favouriteAction
         setFavourite(article.isFavourite)
         
         // Image loading (placeholder for now)
@@ -134,7 +138,7 @@ class ArticleCellTableViewCell: UITableViewCell {
     }
     
     @objc private func favouriteButtonTapped() {
-        favouriteButtonAction?(self)
+        delegate?.didTapOnFavouriteButton(cell: self)
     }
     
 }

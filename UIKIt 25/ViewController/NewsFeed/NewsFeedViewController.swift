@@ -21,7 +21,7 @@ class NewsFeedViewController: UIViewController {
     }
     
     func setupUI(){
-        tableView.register(ArticleCellTableViewCell.self, forCellReuseIdentifier: ArticleCellTableViewCell.reuseIdentifier )
+        tableView.register(ArticleCell.self, forCellReuseIdentifier: ArticleCell.reuseIdentifier )
         tableView.dataSource = self
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 140
@@ -41,7 +41,7 @@ class NewsFeedViewController: UIViewController {
         ])
     }
     
-    private func toggleFavourite(for indexPath: IndexPath, cell: ArticleCellTableViewCell) {
+    private func toggleFavourite(for indexPath: IndexPath, cell: ArticleCell) {
         guard Article.articles.indices.contains(indexPath.row) else { return }
         Article.articles[indexPath.row].isFavourite.toggle()
         let isFavourite = Article.articles[indexPath.row].isFavourite
@@ -55,23 +55,25 @@ extension NewsFeedViewController : UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: ArticleCellTableViewCell.reuseIdentifier, for: indexPath) as? ArticleCellTableViewCell else { return UITableViewCell()
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: ArticleCell.reuseIdentifier, for: indexPath) as? ArticleCell else { return UITableViewCell()
         }
         let article = Article.articles[indexPath.row]
-        cell.config(with: article) { [weak self, weak tableView] tappedCell in
-            guard
-                let self,
-                let tableView,
-                let tappedIndexPath = tableView.indexPath(for: tappedCell)
-            else { return }
-            self.toggleFavourite(for: tappedIndexPath, cell: tappedCell)
-        }
+        cell.config(with: article)
         cell.selectionStyle = .none
+        cell.delegate = self
         
         return cell
     }
     
+}
+
+extension NewsFeedViewController : ArticleCellDelegate {
+    func didTapOnFavouriteButton(cell: ArticleCell) {
+        guard let indexPath = tableView.indexPath(for: cell) else { return }
+        toggleFavourite(for: indexPath, cell: cell)
+    }
     
+     
 }
 
 
