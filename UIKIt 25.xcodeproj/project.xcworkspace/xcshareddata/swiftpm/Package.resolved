@@ -1,0 +1,15 @@
+{
+  "originHash" : "7849801cbfa378165f312eb981d453c4c758802bdfa150844f1bf1d314a11a71",
+  "pins" : [
+    {
+      "identity" : "easynet",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/rezaulislamtarek/EasyNet.git",
+      "state" : {
+        "branch" : "main",
+        "revision" : "2ef832359236a7dcdb14c0e15d054c59cacc7eac"
+      }
+    }
+  ],
+  "version" : 3
+}

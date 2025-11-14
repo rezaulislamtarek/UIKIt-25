@@ -6,6 +6,10 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		0B4C45412EC65D450092CA1B /* EasyNet in Frameworks */ = {isa = PBXBuildFile; productRef = 0B4C45402EC65D450092CA1B /* EasyNet */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
 		0BCF12AB2EC05CCC003BB170 /* UIKIt 25.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "UIKIt 25.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -36,6 +40,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0B4C45412EC65D450092CA1B /* EasyNet in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -78,6 +83,7 @@
 			);
 			name = "UIKIt 25";
 			packageProductDependencies = (
+				0B4C45402EC65D450092CA1B /* EasyNet */,
 			);
 			productName = "UIKIt 25";
 			productReference = 0BCF12AB2EC05CCC003BB170 /* UIKIt 25.app */;
@@ -107,6 +113,9 @@
 			);
 			mainGroup = 0BCF12A22EC05CCC003BB170;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				0B4C453F2EC65D450092CA1B /* XCRemoteSwiftPackageReference "EasyNet" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 0BCF12AC2EC05CCC003BB170 /* Products */;
 			projectDirPath = "";
@@ -339,6 +348,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		0B4C453F2EC65D450092CA1B /* XCRemoteSwiftPackageReference "EasyNet" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/rezaulislamtarek/EasyNet.git";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		0B4C45402EC65D450092CA1B /* EasyNet */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0B4C453F2EC65D450092CA1B /* XCRemoteSwiftPackageReference "EasyNet" */;
+			productName = EasyNet;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 0BCF12A32EC05CCC003BB170 /* Project object */;
 }

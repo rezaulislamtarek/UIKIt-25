@@ -13,6 +13,7 @@ class HomeViewController: UIViewController {
    
     let contactAppButton = UIButton()
     let articleAppButton = UIButton()
+    let foodAppButton = UIButton()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,6 +29,7 @@ class HomeViewController: UIViewController {
     func setupAction(){
         contactAppButton.addTarget(self, action: #selector(navigateToContactList), for: .touchUpInside)
         articleAppButton.addTarget(self, action: #selector(navigateToArticle), for: .touchUpInside)
+        foodAppButton.addTarget(self, action: #selector(navigateToFoodApp), for: .touchUpInside)
     }
 
     func setupUI(){
@@ -41,6 +43,11 @@ class HomeViewController: UIViewController {
         articleAppButton.backgroundColor = .systemBlue
         articleAppButton.layer.cornerRadius = 8
         view.addSubview(articleAppButton)
+        
+        foodAppButton.setTitle("Food App ", for: .normal)
+        foodAppButton.backgroundColor = .systemBlue
+        foodAppButton.layer.cornerRadius = 8
+        view.addSubview(foodAppButton)
     }
 
     func setupConsraints(){
@@ -50,6 +57,9 @@ class HomeViewController: UIViewController {
         
         articleAppButton.setDefultConstraints(view: view, height: 50)
         articleAppButton.topToBottomOf(contactAppButton, 16)
+        
+        foodAppButton.setDefultConstraints(view: view, height: 50)
+        foodAppButton.topToBottomOf(articleAppButton, 16)
     }
 
     @objc func navigateToContactList() {
@@ -59,6 +69,11 @@ class HomeViewController: UIViewController {
     
     @objc func navigateToArticle() {
         let vc = NewsFeedViewController()
+        navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    @objc func navigateToFoodApp() {
+        let vc = FoodListViewController()
         navigationController?.pushViewController(vc, animated: true)
     }
 }
