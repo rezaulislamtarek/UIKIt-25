@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0B4C45412EC65D450092CA1B /* EasyNet in Frameworks */ = {isa = PBXBuildFile; productRef = 0B4C45402EC65D450092CA1B /* EasyNet */; };
+		0B71903D2EC70352001BFFB1 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 0B71903C2EC70352001BFFB1 /* Kingfisher */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +41,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0B71903D2EC70352001BFFB1 /* Kingfisher in Frameworks */,
 				0B4C45412EC65D450092CA1B /* EasyNet in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -84,6 +86,7 @@
 			name = "UIKIt 25";
 			packageProductDependencies = (
 				0B4C45402EC65D450092CA1B /* EasyNet */,
+				0B71903C2EC70352001BFFB1 /* Kingfisher */,
 			);
 			productName = "UIKIt 25";
 			productReference = 0BCF12AB2EC05CCC003BB170 /* UIKIt 25.app */;
@@ -115,6 +118,7 @@
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
 				0B4C453F2EC65D450092CA1B /* XCRemoteSwiftPackageReference "EasyNet" */,
+				0B71903B2EC70352001BFFB1 /* XCRemoteSwiftPackageReference "Kingfisher" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 0BCF12AC2EC05CCC003BB170 /* Products */;
@@ -358,6 +362,14 @@
 				kind = branch;
 			};
 		};
+		0B71903B2EC70352001BFFB1 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/onevcat/Kingfisher.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 8.6.1;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -365,6 +377,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 0B4C453F2EC65D450092CA1B /* XCRemoteSwiftPackageReference "EasyNet" */;
 			productName = EasyNet;
+		};
+		0B71903C2EC70352001BFFB1 /* Kingfisher */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0B71903B2EC70352001BFFB1 /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			productName = Kingfisher;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

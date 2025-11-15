@@ -98,7 +98,7 @@ class LoginViewController: UIViewController {
         }
         startLoading()
         uiLabel.text = "\(email) \(password)"
-        Timer.scheduledTimer(timeInterval: 2, target: self, selector: #selector(navigateToHome), userInfo: nil, repeats: false)
+        Timer.scheduledTimer(timeInterval: 0, target: self, selector: #selector(navigateToHome), userInfo: nil, repeats: false)
     }
     
     func startLoading(){

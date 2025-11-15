@@ -6,23 +6,14 @@
 //
 
 import Foundation
-import EasyNet
 
-class Network {
-    static let shared = Network()
+enum Endpoints {
+    case allFlags
     
-    private let apiKey = "EbRZip3wkVozNuwxPKSHGA==burTpVYa05VMuDTB"
-    
-    // শুধু base URL দেবে — query এখানে দিবে না!
-    private let easyNet = EasyNet(baseUrl: "https://api.api-ninjas.com/v1")
-    
-    private init() {
-        configure()
-    }
-    
-    private func configure() {
-        easyNet.setHeaders(headers: [
-            "X-Api-Key": apiKey
-        ])
+    var path: String {
+        switch self {
+        case .allFlags:
+            return "/countryflag?country=US"
+        }
     }
 }
