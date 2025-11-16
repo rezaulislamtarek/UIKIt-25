@@ -10,19 +10,8 @@ import EasyNet
 
 class Network {
     static let shared = Network()
-    
-    private let apiKey = "EbRZip3wkVozNuwxPKSHGA==burTpVYa05VMuDTB"
-    
-    // শুধু base URL দেবে — query এখানে দিবে না!
-    let easyNet = EasyNet(baseUrl: "https://api.api-ninjas.com/v1", enableDebugLogging: true)
-    
+    let easyNet = EasyNet(baseUrl: Endpoints.baseUrl, enableDebugLogging: true)
     private init() {
-        configure()
-    }
-    
-    private func configure() {
-        easyNet.setHeaders(headers: [
-            "X-Api-Key": apiKey
-        ])
+        easyNet.setHeaders(headers: ["String" : "String"])
     }
 }
