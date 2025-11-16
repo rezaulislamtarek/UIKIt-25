@@ -9,11 +9,20 @@ import Foundation
 
 enum Endpoints {
     case allFlags
+    case plces
+    case getAmbulance
     
     var path: String {
         switch self {
         case .allFlags:
             return "/countryflag?country=US"
+        case .plces:
+            return "/place/getPlacesByUpId/1"
+        case .getAmbulance:
+            return "/transport/getAmb"
         }
     }
 }
+
+
+ 
