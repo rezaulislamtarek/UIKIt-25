@@ -8,6 +8,7 @@
 import Foundation
 
 enum Endpoints {
+    static let baseUrl : String = "https://api.smartbancharampur.com"
     case allFlags
     case plces
     case getAmbulance
@@ -17,9 +18,9 @@ enum Endpoints {
         case .allFlags:
             return "/countryflag?country=US"
         case .plces:
-            return "/place/getPlacesByUpId/1"
+            return "/api/place/getPlacesByUpId/1"
         case .getAmbulance:
-            return "/transport/getAmb"
+            return "/api/transport/getAmb"
         }
     }
 }

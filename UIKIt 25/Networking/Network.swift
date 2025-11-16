@@ -10,6 +10,8 @@ import EasyNet
 
 class Network {
     static let shared = Network()
-    let easyNet = EasyNet(baseUrl: "https://api.smartbancharampur.com/api", enableDebugLogging: true)
-    private init() { }
+    let easyNet = EasyNet(baseUrl: Endpoints.baseUrl, enableDebugLogging: true)
+    private init() {
+        easyNet.setHeaders(headers: ["String" : "String"])
+    }
 }

@@ -12,7 +12,7 @@ struct TransportResponse: Codable {
     let data: [Transport]
 }
 
-struct Transport: Codable {
+struct Transport: Codable, Equatable, Hashable {
     let id: Int
     let nameOrModel: String
     let regNo: String

@@ -9,15 +9,23 @@ import Foundation
 
 struct PlaceResponse: Codable {
     let message: String
-    let data: [Place]
+    var data: [Place]? = []
 }
 
-struct Place: Codable {
+struct Place: Codable, Equatable, Hashable {
     let placeId: Int
     let placeName: String
     let photo: String
     let villageName: String
     let unionName: String
+    
+    enum CodingKeys: String, CodingKey {
+        case placeId = "place_id"
+        case placeName
+        case photo
+        case villageName
+        case unionName
+    }
 }
 
 extension Place {

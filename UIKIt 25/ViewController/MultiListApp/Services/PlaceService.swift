@@ -15,7 +15,7 @@ class PlaceService: PlaceServiceProtocol {
     private var cancellable: Set<AnyCancellable> = []
     func fetchPlaces() async throws -> [Place] {
         return try await withCheckedThrowingContinuation { (continuation: CheckedContinuation<[Place], Error>) in
-            Network.shared.easyNet.fetchData(endPoint: Endpoints.plces.path, responseType: PlaceResponse.self)
+            Network.shared.easyNet.fetchData(endPoint: Endpoints.plces.path, responseType: PlaceResponse.self, extraHeaders: ["a" : "b"])
                 .sink { completion in
                     switch completion {
                     case .failure(let error):
@@ -24,7 +24,7 @@ class PlaceService: PlaceServiceProtocol {
                         break
                     }
                 } receiveValue: { response in
-                    continuation.resume(returning: response.data)
+                    continuation.resume(returning: response.data ?? [])
                 }
                 .store(in: &cancellable)
         }
