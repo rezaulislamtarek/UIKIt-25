@@ -14,11 +14,14 @@ protocol PlaceServiceProtocol {
 class PlaceService: PlaceServiceProtocol {
     private var cancellable: Set<AnyCancellable> = []
     func fetchPlaces() async throws -> [Place] {
+        print("PlaceService called ")
         return try await withCheckedThrowingContinuation { (continuation: CheckedContinuation<[Place], Error>) in
             Network.shared.easyNet.fetchData(endPoint: Endpoints.plces.path, responseType: PlaceResponse.self, extraHeaders: ["a" : "b"])
                 .sink { completion in
+                    print("completion called")
                     switch completion {
                     case .failure(let error):
+                        print("completion called \(error) ")
                         continuation.resume(throwing: error)
                     case .finished:
                         break
