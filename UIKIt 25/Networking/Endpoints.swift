@@ -11,6 +11,7 @@ enum Endpoints {
     static let baseUrl : String = "https://api.smartbancharampur.com"
     case allFlags
     case plces
+    case placeDetails(Int)
     case getAmbulance
     
     var path: String {
@@ -19,6 +20,8 @@ enum Endpoints {
             return "/countryflag?country=US"
         case .plces:
             return "/api/place/getPlacesByUpId/1"
+        case .placeDetails(let id):
+            return "/api/place/placeByPlaceId/\(id)"
         case .getAmbulance:
             return "/api/transport/getAmb"
         }
