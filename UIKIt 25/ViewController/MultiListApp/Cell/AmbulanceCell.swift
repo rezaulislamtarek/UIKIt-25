@@ -43,11 +43,11 @@ final class AmbulanceCell: UITableViewCell {
     
     private let containerView : UIView = {
         let view = UIView()
-        view.layer.cornerRadius = 10
+        view.layer.cornerRadius = 8
         view.layer.masksToBounds = true
         view.backgroundColor = .systemBackground
         view.layer.borderColor = UIColor.separator.cgColor
-        view.layer.borderWidth = 2
+        view.layer.borderWidth = 0.2
         view.layer.masksToBounds = true
         return view
     }()
@@ -64,7 +64,6 @@ final class AmbulanceCell: UITableViewCell {
     
     private func setupLayout() {
         selectionStyle = .none
-        
         contentView.addSubview(containerView)
         containerView.translatesAutoresizingMaskIntoConstraints = false
         let stack = UIStackView(arrangedSubviews: [
@@ -81,8 +80,8 @@ final class AmbulanceCell: UITableViewCell {
         NSLayoutConstraint.activate([
             containerView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8),
             containerView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -8),
-            containerView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 8),
-            containerView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -8),
+            containerView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
+            containerView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
             
             stack.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 8),
             stack.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -8),
