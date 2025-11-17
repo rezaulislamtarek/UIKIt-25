@@ -41,6 +41,8 @@ class MultiListVC: UIViewController {
         tableView.rowHeight = 50
         tableView.rowHeight = UITableView.automaticDimension
         
+        tableView.delegate = self
+        
         NSLayoutConstraint.activate([
             tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor ),
             tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor ),
@@ -78,5 +80,23 @@ class MultiListVC: UIViewController {
         snapShot.appendItems(vm.ambulances.map {.ambiumance($0) }, toSection: .ambulances)
         
         dataSources.apply(snapShot, animatingDifferences: false)
+    }
+}
+
+
+extension MultiListVC : UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        // diffable data source থেকে item বের করছি
+        guard let item = dataSources.itemIdentifier(for: indexPath) else { return }
+        
+        switch item {
+        case .place(let place):
+            print("place")
+            let vc = PlaceDetailsVC(placeId: place.placeId)
+            navigationController?.pushViewController(vc, animated: true)
+        case .ambiumance(let amb):
+            print("Ambulance \(amb)")
+        }
     }
 }

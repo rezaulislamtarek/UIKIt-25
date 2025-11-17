@@ -17,7 +17,13 @@ struct Place: Codable, Equatable, Hashable {
     let placeName: String
     let photo: String
     let villageName: String
-    let unionName: String 
+    let unionName: String
+    var placeDetails: String? = nil
+}
+
+struct PlaceDetailsResponse: Codable {
+    let message : String
+    let data: Place
 }
 
 extension Place {
