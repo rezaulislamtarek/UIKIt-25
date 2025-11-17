@@ -18,15 +18,16 @@ enum Item : Hashable {
 }
 
 class MultiListVC: UIViewController {
-    private let tableView = UITableView(frame: .zero, style: .insetGrouped)
+    private let tableView = UITableView()
     private var dataSources : UITableViewDiffableDataSource<Section,Item>!
     private let vm = MultiListViewModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = .systemBackground
+        title = "Multi List"
         setupTableView()
         setupDataSource()
-        
         Task{
             await vm.loadData()
             applySnapshot()
@@ -35,8 +36,17 @@ class MultiListVC: UIViewController {
     
     private func setupTableView() {
         view.addSubview(tableView)
-        tableView.frame = view.bounds
-        tableView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        tableView.separatorStyle = .none
+        tableView.rowHeight = 50
+        tableView.rowHeight = UITableView.automaticDimension
+        
+        NSLayoutConstraint.activate([
+            tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor ),
+            tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor ),
+            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor ),
+            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor ),
+        ])
         
         tableView.register(PlaceCell.self, forCellReuseIdentifier: PlaceCell.reuseIdentifier)
         tableView.register(AmbulanceCell.self, forCellReuseIdentifier: AmbulanceCell.reuseIdentifier)
@@ -67,6 +77,6 @@ class MultiListVC: UIViewController {
         snapShot.appendItems(vm.places.map {.place($0) }, toSection: .places)
         snapShot.appendItems(vm.ambulances.map {.ambiumance($0) }, toSection: .ambulances)
         
-        dataSources.apply(snapShot, animatingDifferences: true)
+        dataSources.apply(snapShot, animatingDifferences: false)
     }
 }

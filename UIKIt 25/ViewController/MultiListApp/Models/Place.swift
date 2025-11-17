@@ -17,15 +17,7 @@ struct Place: Codable, Equatable, Hashable {
     let placeName: String
     let photo: String
     let villageName: String
-    let unionName: String
-    
-    enum CodingKeys: String, CodingKey {
-        case placeId = "place_id"
-        case placeName
-        case photo
-        case villageName
-        case unionName
-    }
+    let unionName: String 
 }
 
 extension Place {
@@ -41,7 +33,7 @@ extension Place {
             placeId: 8,
             placeName: "রূপসদী জমিদার বাড়ি",
             photo: "/uploads/images/ruposdi.jpeg",
-            villageName: "Rupasdi",
+            villageName: "Rupasdi Is a big village in Rupushdi Union of Saifulakandi Upazila of Rangpur District in Bangladesh I need your help to save this village from being demolished. Please help me to save this village from being demolished.",
             unionName: "Rupushdi"
         ),
         Place(

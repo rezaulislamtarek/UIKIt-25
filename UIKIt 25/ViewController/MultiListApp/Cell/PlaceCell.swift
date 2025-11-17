@@ -30,6 +30,7 @@ class PlaceCell: UITableViewCell {
         let label = UILabel()
         label.font = .systemFont(ofSize: 15)
         label.textColor = .secondaryLabel
+        label.numberOfLines = 0
         return label
     }()
     
@@ -37,9 +38,11 @@ class PlaceCell: UITableViewCell {
         let v = UIView()
         v.layer.cornerRadius = 8
         v.backgroundColor = .systemBackground
-        v.layer.borderWidth = 0.5
+        v.layer.borderWidth = 0.4
         v.layer.borderColor = UIColor.separator.cgColor
         v.layer.masksToBounds = true
+        v.layer.shadowColor = UIColor.black.cgColor
+        v.layer.shadowRadius = 4
         return v
     }()
     
@@ -53,8 +56,6 @@ class PlaceCell: UITableViewCell {
     }
     
     private func setupLayout() {
-        selectionStyle = .none
-        
         contentView.addSubview(containerView)
         containerView.translatesAutoresizingMaskIntoConstraints = false
         

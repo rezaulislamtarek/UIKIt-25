@@ -15,7 +15,7 @@ class MultiListViewModel {
     @Published var isLoading: Bool = false
     @Published var errorMessage: String?
     
-    init(ambService: AmbulanceServiceProtocol = AmbulanceService(), placeService: PlaceServiceProtocol = PlaceService()) {
+    init(ambService: AmbulanceServiceProtocol = AmbulanceService(), placeService: PlaceServiceProtocol = MockPlaceService()) {
         self.ambService = ambService
         self.placeService = placeService
     }
